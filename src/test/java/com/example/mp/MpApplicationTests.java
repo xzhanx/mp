@@ -3,6 +3,7 @@ package com.example.mp;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mp.enums.SexEnum;
+import com.example.mp.mapper.TestMybatis;
 import com.example.mp.model.User;
 import com.example.mp.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -68,5 +69,22 @@ class MpApplicationTests {
     @Test
     public void testEnum() {
         userService.save(new User("enum", 22, "aaa@ccc.com", SexEnum.women));
+    }
+
+    @Test
+    public void testIn() {
+        List<User> list = userService.getBaseMapper().testIn(Arrays.asList(1, 2, 3));
+        System.out.println(list);
+        System.out.println("*****************");
+        List<User> list2 = userService.getBaseMapper().testInString(Arrays.asList("Jone", "Jack", "Tom"));
+        System.out.println(list2);
+    }
+
+    @Autowired
+    TestMybatis testMybatis;
+
+    @Test
+    public void testInt() {
+        System.out.println(testMybatis.testInt());
     }
 }
